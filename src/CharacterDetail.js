@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { getCharacterById } from './service/httpRequest'; 
-import './CharacterDetail.css'; 
+import { getCharacterById } from './service/httpRequest';
 
 function CharacterDetail() {
   const { id } = useParams();
-  const [character, setCharacter] = useState(null);
+  const [drink, setDrink] = useState(null);
 
   useEffect(() => {
-    const fetchCharacter = async () => {
-      const data = await getCharacterById(id);
-      setCharacter(data);
+    const fetchDrinkDetail = async () => {
+      const drinkData = await getCharacterById(id);
+      setDrink(drinkData);
     };
-    fetchCharacter();
+    fetchDrinkDetail();
   }, [id]);
 
-  if (!character) return <p className="text-center my-5">Cargando...</p>;
+  if (!drink) {
+    return <p>Loading...</p>;
+  }
 
   return (
-    <div className="container my-5">
-      <div className="card mx-auto" style={{ maxWidth: '500px' }}>
-        <img src={character.image} className="card-img-top" alt={character.name} />
-        <div className="card-body text-center">
-          <h2 className="card-title">{character.name}</h2>
-          <p className="card-text"><strong>Género:</strong> {character.gender}</p>
-          <p className="card-text"><strong>Especie:</strong> {character.species}</p>
-          <p className="card-text"><strong>Estado:</strong> {character.status}</p>
-          <a href="/" className="btn btn-primary mt-3">Volver</a>
-        </div>
-      </div>
+    <div className="container">
+      <h2>{drink.strDrink}</h2>
+      <img src={drink.strDrinkThumb} alt={drink.strDrink} className="img-fluid" />
+      <p><strong>Categoría:</strong> {drink.strCategory}</p>
+      <p><strong>Tipo de Vaso:</strong> {drink.strGlass}</p>
+      <p><strong>Instrucciones:</strong> {drink.strInstructions}</p>
     </div>
   );
 }
