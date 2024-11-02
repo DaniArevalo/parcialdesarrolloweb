@@ -1,0 +1,16 @@
+/* CharacterDetail.css */
+.character-detail .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  .character-detail .card-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+  }
+  
+  .character-detail .card-text {
+    font-size: 1.1rem;
+    color: #555;
+  }
+  
